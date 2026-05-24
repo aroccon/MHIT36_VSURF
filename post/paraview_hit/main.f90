@@ -16,6 +16,7 @@ read(10,*) uflag
 read(10,*) vflag
 read(10,*) wflag
 read(10,*) phiflag
+read(10,*) surflag
 
 !! overide (if there are problems)
 !nstart=0

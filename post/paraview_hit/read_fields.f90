@@ -18,7 +18,7 @@ allocate(u(nx,ny,nz))
 allocate(v(nx,ny,nz))
 allocate(w(nx,ny,nz))
 allocate(phi(nx,ny,nz))
-allocate(surf(nx,ny))
+allocate(surf(nx,ny,nz))
 
 
 write(*,*) 'Reading step ',nstep,' out of ',nend,' , flow'
