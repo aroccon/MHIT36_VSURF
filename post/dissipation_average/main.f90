@@ -215,8 +215,15 @@ subroutine read_fields_snap(nstep, phi)
   write(fname,'(a,a,a,i8.8,a)') trim(input_dir), '/', 'phi_', nstep, '.dat'
   open(newunit=io, file=trim(fname), form='unformatted', &
        access='stream', status='old', action='read', iostat=ierr)
-  if (ierr /= 0) then; write(*,*) '[error] cannot open ', trim(fname); stop 1; end if
-  read(io) phi; close(io)
+  if (ierr /= 0) then
+     ! No phase-field dump for this snapshot (e.g. single-phase HIT precursor run):
+     ! fall back to phi = 0 everywhere, i.e. pure matrix phase (nu = nu_matrix).
+     write(*,'(a,a,a)') '[warn] phi field not found (', trim(fname), &
+          '); assuming single-phase run, using nu_matrix everywhere'
+     phi = 0.0d0
+  else
+     read(io) phi; close(io)
+  end if
 end subroutine read_fields_snap
 
 
