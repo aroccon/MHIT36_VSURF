@@ -8,7 +8,8 @@
 0.0001      ! dt for the simulation
 0.006       ! muc (viscosity carrier)
 0.006       ! mud (viscosity dispersed)
-1.000       ! density
+1.000       ! rhoc (density carrier)
+1.000       ! rhod (density dispersed)
 1.0         ! A forcing parameter (ABC forcing)
 1.0         ! B forcing parameter (ABC forcing)
 1.0         ! C forcing parameter (ABC forcing)

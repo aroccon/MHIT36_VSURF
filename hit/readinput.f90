@@ -23,7 +23,8 @@ read(55,*) insurf
 read(55,*) dt
 read(55,*) muc
 read(55,*) mud
-read(55,*) rho
+read(55,*) rhoc
+read(55,*) rhod
 ! forcing parameters
 read(55,*) f1
 read(55,*) f2
@@ -46,7 +47,10 @@ dx = lx/(nx)
 
 dxi=1.d0/dx
 ddxi=1.d0/dx/dx
-rhoi=1.d0/rho
+rhoi=1.d0/rhoc
+! reference density for the pressure splitting: must be the minimum density for stability
+rho0=min(rhoc,rhod)
+rho0i=1.d0/rho0
 eps=epsr*dx
 epsi=1.d0/eps
 enum=1.e-16
@@ -70,7 +74,9 @@ if (rank .eq. 0) then
     write(*,*) "Deltat  ", dt
     write(*,*) "Mu carrier     ", muc
     write(*,*) "Mu drop        ", mud
-    write(*,*) "Rho     ", rho
+    write(*,*) "Rho carrier    ", rhoc
+    write(*,*) "Rho drop       ", rhod
+    write(*,*) "Rho0 (ref.)    ", rho0
     write(*,*) "f1,f2,f3,k0", f1,f2,f3,k0
     write(*,*) "Radius  ", radius
     write(*,*) "Sigma   ", sigma
