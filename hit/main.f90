@@ -263,28 +263,18 @@ enddo
 ! START STEP 2: ALLOCATE ARRAYS
 !########################################################################################################################################
 
-! allocate arrays
+! allocate arrays for cuDecomp
 allocate(psi(max(nElemX, nElemY, nElemZ))) !largest among the pencil
 allocate(psi_real(max(nElemX, nElemY, nElemZ))) !largest among the pencil
 allocate(psi_d(max(nElemX_d2z, nElemY_d2z, nElemZ_d2z))) ! phi on device
 allocate(ua(nx, piX%shape(2), piX%shape(3)))
-
-! Pressure variable
-allocate(rhsp(piX%shape(1), piX%shape(2), piX%shape(3))) 
-allocate(p(piX%shape(1), piX%shape(2), piX%shape(3)))
-allocate(pold(piX%shape(1), piX%shape(2), piX%shape(3)))
-! pressure history used by the Dodd & Ferrante splitting (zero at start)
-p=0.d0
-pold=0.d0
-
-!allocate variables
-!NS variables
 allocate(u(piX%shape(1),piX%shape(2),piX%shape(3)),v(piX%shape(1),piX%shape(2),piX%shape(3)),w(piX%shape(1),piX%shape(2),piX%shape(3))) !velocity vector
-! allocate(ustar(piX%shape(1),piX%shape(2),piX%shape(3)),vstar(piX%shape(1),piX%shape(2),piX%shape(3)),wstar(piX%shape(1),piX%shape(2),piX%shape(3))) ! provisional velocity field
 allocate(rhsu(piX%shape(1),piX%shape(2),piX%shape(3)),rhsv(piX%shape(1),piX%shape(2),piX%shape(3)),rhsw(piX%shape(1),piX%shape(2),piX%shape(3))) ! right hand side u,v,w
 allocate(rhsu_o(piX%shape(1),piX%shape(2),piX%shape(3)),rhsv_o(piX%shape(1),piX%shape(2),piX%shape(3)),rhsw_o(piX%shape(1),piX%shape(2),piX%shape(3))) ! right hand side u,v,w
 allocate(mu(piX%shape(1),piX%shape(2),piX%shape(3)))
 allocate(tau12(piX%shape(1),piX%shape(2),piX%shape(3)),tau13(piX%shape(1),piX%shape(2),piX%shape(3)),tau23(piX%shape(1),piX%shape(2),piX%shape(3)))
+! Pressure variable
+allocate(rhsp(piX%shape(1), piX%shape(2), piX%shape(3)), p(piX%shape(1), piX%shape(2), piX%shape(3)),pold(piX%shape(1), piX%shape(2), piX%shape(3)))
 !PFM variables
 #if phiflag == 1
 allocate(phi(piX%shape(1),piX%shape(2),piX%shape(3)),q_phi(piX%shape(1),piX%shape(2),piX%shape(3)),rhsphi(piX%shape(1),piX%shape(2),piX%shape(3)),psidi(piX%shape(1),piX%shape(2),piX%shape(3)))
